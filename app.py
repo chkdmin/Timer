@@ -9,10 +9,18 @@ app = Flask(__name__)
 app.config['DEBUG'] = True
 
 
+def millis_interval(diff):
+    """start and end are datetime instances"""
+    millis = diff.days * 24 * 60 * 60 * 1000
+    millis += diff.seconds * 1000
+    millis += diff.microseconds / 1000
+    return millis
+
+
 @app.route('/')
 def index():
-    start = Arrow(year=2017, month=3, day=15)
-    end = Arrow(year=2020, month=1, day=14)
+    start = Arrow(year=2017, month=3, day=15, tzinfo='Asia/Seoul')
+    end = Arrow(year=2020, month=1, day=14, tzinfo='Asia/Seoul')
     now = now_()
     total_days_time_delta = end - start
     left_days_time_delta = end - now
@@ -22,8 +30,8 @@ def index():
     left_days = left_days_time_delta.days
     days = days_time_delta.days
 
-    total_seconds = total_days_time_delta.total_seconds() * 1000
-    seconds = left_days_time_delta.total_seconds() * 1000
+    total_seconds = millis_interval(total_days_time_delta)
+    seconds = millis_interval(left_days_time_delta)
     left_percentages = (1 - (seconds / total_seconds)) * 100
 
     nearly_percentages = math.ceil(left_percentages)

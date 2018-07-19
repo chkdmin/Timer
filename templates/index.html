@@ -6,7 +6,7 @@
     <meta property="og:title" content="노예 타이머"/>
     <meta property="og:url" content="http://slave.changm.in"/>
     <meta property="og:image" content="http://gs.saro.me/gs/og-image.png"/>
-    <meta property="og:description" content=""/>
+    <meta property="og:description" content="{{ days }} / {{ total_days }}\n{{ left_percentages }}%\nD-{{ left_days }}"/>
     <link rel="stylesheet" type="text/css" href="../static/index.css">
     <title>Timer</title>
   </head>
@@ -24,5 +24,5 @@
   </body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="{{ url_for('static', filename='moment.min.js') }}"></script>
-{#  <script src="{{ url_for('static', filename='index.js') }}"></script>#}
+  <script src="{{ url_for('static', filename='index.js') }}"></script>
 </html>
