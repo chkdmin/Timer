@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="노예 타이머"/>
+    <meta property="og:url" content="http://slave.changm.in"/>
+    <meta property="og:image" content="http://gs.saro.me/gs/og-image.png"/>
+    <meta property="og:description" content=""/>
+    <link rel="stylesheet" type="text/css" href="../static/index.css">
+    <title>Timer</title>
+  </head>
+  <body>
+{#    <div class="bg-cover"></div>#}
+    <div class="section bg">
+      <h1 id="title">SLAVE TIMER</h1>
+      <h2 id="days">{{ days }}</h2> <span> / </span> <span id="total-days">{{ total_days }}</span>
+      <br />
+      <h3 id="percentages">{{ left_percentages }}</h3> <span>%</span>
+      <p><span id="left-days">{{ left_days }}</span><span> days left</span></p>
+      <p><span id="nearly-percentages">{{ nearly_percentages }}</span> <span>%</span><span> in </span><span id="left-days-for-nearly-percentages">{{ left_days_for_nearly_percentages }}</span><span> days</span></p>
+      <p><span id="next-nearly-percentages">{{ next_nearly_percentage_days }}</span> <span>%</span><span> on </span><span id="date-for-next-nearly-percentages">{{ date_for_next_nearly_percentages }}</span></p>
+    </div>
+  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="{{ url_for('static', filename='moment.min.js') }}"></script>
+{#  <script src="{{ url_for('static', filename='index.js') }}"></script>#}
+</html>
