@@ -8,6 +8,7 @@ from flask_s3 import FlaskS3
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(ROOT_DIR, 'templates')
 STATIC_DIR = os.path.join(ROOT_DIR, 'static')
+s3 = FlaskS3()
 
 
 def create_app():
@@ -19,8 +20,14 @@ def create_app():
         config.read_file(f)
         app_.config['AWS_ACCESS_KEY_ID'] = config['zappa-personal']['aws_access_key_id']
         app_.config['AWS_SECRET_ACCESS_KEY'] = config['zappa-personal']['aws_secret_access_key']
+
+    app_.config['FLASKS3_FILEPATH_HEADERS'] = {
+        r'.css$': {
+            'Content-Type': 'text/css',
+        }
+    }
     app_.config['FLASKS3_BUCKET_NAME'] = 'zappa-slave-timer'
-    s3 = FlaskS3(app_)
+    s3.init_app(app_)
     return app_
 
 
