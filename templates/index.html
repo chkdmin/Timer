@@ -5,9 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:title" content="노예 타이머"/>
     <meta property="og:url" content="http://slave.changm.in"/>
-    <meta property="og:image" content="http://gs.saro.me/gs/og-image.png"/>
-    <meta property="og:description" content="{{ days }} / {{ total_days }}\n{{ left_percentages }}%\nD-{{ left_days }}"/>
-    <link rel="stylesheet" type="text/css" href="../static/index.css">
+    <meta property="og:image" content="http://k.kakaocdn.net/dn/4TakA/btqnqEhKk7i/anGGsHDUFjzAVAnIlD3kNK/profile_640x640s.jpg"/>
+    <meta property="og:description"
+          content="{{ days }} / {{ total_days }} &
+                   {{ left_percentages|float|round(2, 'floor') }}% &
+                   D-{{ left_days }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}">
     <title>Timer</title>
   </head>
   <body>
