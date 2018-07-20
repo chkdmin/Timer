@@ -1,6 +1,6 @@
 $(document).ready(() => {
-    let start = moment('2017-03-15');
-    let end = moment('2020-01-14');
+    let start = moment(START_DATE_STRING);
+    let end = moment(END_DATE_STRING);
 
     let total_seconds = end.diff(start, 'millisecond');
     setInterval(() => {

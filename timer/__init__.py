@@ -11,23 +11,32 @@ STATIC_DIR = os.path.join(ROOT_DIR, 'static')
 s3 = FlaskS3()
 
 
-def create_app():
-    app_ = Flask(__name__, template_folder=TEMPLATE_DIR, static_folder=STATIC_DIR)
-    app_.config['DEBUG'] = False
+def init_config(app_):
+    from timer import config
+    for c in dir(config):
+        if c.startswith('__') and c.endswith('__'):
+            continue
+        attr = getattr(config, c, None)
+        if attr is None:
+            continue
 
+        app_.config[c] = attr
+
+
+def init_flask_s3(app_):
     with open(os.path.join(ROOT_DIR, '.aws/credentials')) as f:
         config = ConfigParser()
         config.read_file(f)
         app_.config['AWS_ACCESS_KEY_ID'] = config['zappa-personal']['aws_access_key_id']
         app_.config['AWS_SECRET_ACCESS_KEY'] = config['zappa-personal']['aws_secret_access_key']
 
-    app_.config['FLASKS3_FILEPATH_HEADERS'] = {
-        r'.css$': {
-            'Content-Type': 'text/css',
-        }
-    }
-    app_.config['FLASKS3_BUCKET_NAME'] = 'zappa-slave-timer'
     s3.init_app(app_)
+
+
+def create_app():
+    app_ = Flask(__name__, template_folder=TEMPLATE_DIR, static_folder=STATIC_DIR)
+    init_config(app_)
+    init_flask_s3(app_)
     return app_
 
 

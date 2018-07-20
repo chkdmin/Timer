@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:title" content="노예 타이머"/>
-    <meta property="og:url" content="http://slave.changm.in"/>
+    <meta property="og:url" content="https://slave.changm.in"/>
     <meta property="og:image" content="http://k.kakaocdn.net/dn/4TakA/btqnqEhKk7i/anGGsHDUFjzAVAnIlD3kNK/profile_640x640s.jpg"/>
     <meta property="og:description"
           content="{{ days }} / {{ total_days }} &
@@ -14,7 +14,6 @@
     <title>Timer</title>
   </head>
   <body>
-{#    <div class="bg-cover"></div>#}
     <div class="section bg">
       <h1 id="title">SLAVE TIMER</h1>
       <h2 id="days">{{ days }}</h2> <span> / </span> <span id="total-days">{{ total_days }}</span>
@@ -26,6 +25,10 @@
     </div>
   </body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+    const START_DATE_STRING = '{{ config.START_DATE_STRING }}';
+    const END_DATE_STRING = '{{ config.END_DATE_STRING }}';
+  </script>
   <script src="{{ url_for('static', filename='moment.min.js') }}"></script>
   <script src="{{ url_for('static', filename='index.js') }}"></script>
 </html>
