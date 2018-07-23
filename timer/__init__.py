@@ -5,10 +5,10 @@ from configparser import ConfigParser
 from flask import Flask
 from flask_s3 import FlaskS3
 
-ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-TEMPLATE_DIR = os.path.join(ROOT_DIR, 'templates')
-STATIC_DIR = os.path.join(ROOT_DIR, 'static')
-s3 = FlaskS3()
+from timer.config import ROOT_DIR, TEMPLATE_DIR, STATIC_DIR
+from timer.imgur import ImgurClient
+
+imgur_client = None
 
 
 def init_config(app_):
@@ -27,16 +27,28 @@ def init_flask_s3(app_):
     with open(os.path.join(ROOT_DIR, '.aws/credentials')) as f:
         config = ConfigParser()
         config.read_file(f)
-        app_.config['AWS_ACCESS_KEY_ID'] = config['zappa-personal']['aws_access_key_id']
-        app_.config['AWS_SECRET_ACCESS_KEY'] = config['zappa-personal']['aws_secret_access_key']
 
-    s3.init_app(app_)
+    app_.config['AWS_ACCESS_KEY_ID'] = config['zappa-personal']['aws_access_key_id']
+    app_.config['AWS_SECRET_ACCESS_KEY'] = config['zappa-personal']['aws_secret_access_key']
+
+    FlaskS3(app_)
+
+
+def init_imgur_client():
+    global imgur_client
+    with open(os.path.join(ROOT_DIR, '.imgur/credentials')) as f:
+        config = ConfigParser()
+        config.read_file(f)
+
+    imgur_client = ImgurClient(client_id=config['default']['client_id'],
+                               client_secret=config['default']['client_secret'])
 
 
 def create_app():
     app_ = Flask(__name__, template_folder=TEMPLATE_DIR, static_folder=STATIC_DIR)
     init_config(app_)
     init_flask_s3(app_)
+    init_imgur_client()
     return app_
 
 
