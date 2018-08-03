@@ -31,7 +31,7 @@ def index():
     left_percentages = (1 - (seconds / total_seconds)) * 100
 
     nearly_percentages = math.ceil(left_percentages)
-    left_days_for_nearly_percentages = math.ceil(total_days * nearly_percentages * 0.01) - days
+    left_days_for_nearly_percentages = math.floor(total_days * nearly_percentages * 0.01) - days
     floored_left_percentage = math.floor(left_percentages)
     next_nearly_percentages = floored_left_percentage - (floored_left_percentage % 5) + 5
     next_nearly_percentage_days = math.ceil(total_days * next_nearly_percentages * 0.01) - days
