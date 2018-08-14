@@ -23,7 +23,7 @@ def index():
     days_time_delta = now - start
 
     total_days = total_days_time_delta.days
-    left_days = left_days_time_delta.days
+    left_days = (left_days_time_delta.days + 1)
     days = days_time_delta.days
 
     total_seconds = millis_interval(total_days_time_delta)
@@ -35,7 +35,7 @@ def index():
     floored_left_percentage = math.floor(left_percentages)
     next_nearly_percentages = floored_left_percentage - (floored_left_percentage % 5) + 5
     next_nearly_percentage_days = math.ceil(total_days * next_nearly_percentages * 0.01) - days
-    date_for_next_nearly_percentages = (now + timedelta(days=next_nearly_percentage_days)).format('MM/DD')
+    date_for_next_nearly_percentages = (now + timedelta(days=next_nearly_percentage_days - 1)).format('MM/DD')
 
     if link is None:
         # 미리보기 이미지 생성 및 업로드
