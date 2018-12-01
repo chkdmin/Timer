@@ -24,6 +24,8 @@ def index():
 
     total_days = total_days_time_delta.days
     left_days = (left_days_time_delta.days + 1)
+    if left_days <= 0:
+        return render_template("finish.html", left_days=(left_days * -1))
     days = days_time_delta.days
 
     total_seconds = millis_interval(total_days_time_delta)
