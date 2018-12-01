@@ -7,6 +7,15 @@ $(document).ready(() => {
         let now = moment();
         let seconds = end.diff(now, 'millisecond');
         let left_percentage = (1 - (seconds / total_seconds)) * 100;
-        $('#percentages').text(left_percentage.toFixed(7));
+        $('#current-percentages').text(left_percentage.toFixed(7));
     });
+
+    $('.toggle').click((e) => {
+        const $box = $(e.target).parents('.toggle-box').children('div');
+        if ($box.css('display') == 'none') {
+            $box.show();
+        } else {
+            $box.hide();
+        }
+    })
 });

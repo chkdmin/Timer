@@ -59,13 +59,19 @@ span {
     font-size: 1.5rem;
 }
 
-#percentages {
+#current-percentages {
     color: #fff;
     display: inline;
 }
 
-#title, #left-days, #next-nearly-percentages,
-#nearly-percentages, #left-days-for-nearly-percentages,
-#date-for-next-nearly-percentages {
+#title, #left-days, #percentages, #percentages-date {
     color: #fff;
+}
+
+.toggle-box .toggle {
+    cursor: pointer;
+}
+
+.toggle-box div {
+    display: none;
 }
