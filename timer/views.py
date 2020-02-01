@@ -24,8 +24,6 @@ def index():
 
     total_days = total_days_time_delta.days
     left_days = (left_days_time_delta.days + 1)
-    if left_days <= 0:
-        return render_template("finish.html", left_days=(left_days * -1))
     days = days_time_delta.days
 
     total_seconds = millis_interval(total_days_time_delta)
@@ -34,7 +32,7 @@ def index():
 
     nearly_percentages = math.ceil(left_percentages)
     percentages_data = []
-    for percentage in range(int(nearly_percentages), 101):
+    for percentage in range(int(nearly_percentages), 1001):
         left_day_of_percentages = math.floor(total_days * percentage * 0.01) - days
         percentages_date = now + timedelta(days=left_day_of_percentages)
         percentages_data.append(
@@ -47,7 +45,7 @@ def index():
         # 미리보기 이미지 생성 및 업로드
         im = generate_text_image((
             f'{days} / {total_days}',
-            '{0:.2f}%'.format(left_percentages) + f' (D - {left_days})',
+            '{0:.2f}%'.format(left_percentages) + f' (D + {abs(left_days)})',
             f'{percentages_data[0]["percentage"]}% on {percentages_data[0]["percentages_date"]} (D-{percentages_data[0]["left_day_of_percentages"]})'
         ))
         output = BytesIO()
