@@ -26,14 +26,14 @@ placebo==0.8.1
 python-dateutil==2.6.1
 python-slugify==1.2.4
 PyYAML==5.1
-requests==2.19.1
+requests==2.20.0
 s3transfer==0.1.13
 six==1.11.0
 toml==0.9.4
 tqdm==4.19.1
 troposphere==2.3.1
 Unidecode==1.0.22
-urllib3==1.23
+urllib3==1.24.2
 uWSGI==2.0.17.1
 Werkzeug==0.14.1
 wsgi-request-logger==0.4.6
